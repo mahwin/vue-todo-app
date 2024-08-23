@@ -22,3 +22,5 @@
   - pnpm install -D tailwindcss postcss autoprefixer
   - npx tailwindcss init
   - tailwind.config.js 파일에 적절한 옵션 넣기
+  - post.config.js 파일에 적절한 옵션 넣기
+  - main.js 파일에서 tailwind 관련 설정 적용하기
