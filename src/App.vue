@@ -1,13 +1,19 @@
 <template>
-  <div id="app">
-    <div class="bg-red-100">122131233</div>
-    <div class="bg-blue-100">122131233</div>
+  <div id="app" class="h-screen flex justify-center items-center bg-blue-200">
+    <LayoutComponent><TodoComponenet /></LayoutComponent>
   </div>
 </template>
 
 <script>
+import LayoutComponent from "./components/layout";
+import TodoComponenet from "./components/todo";
+
 export default {
   name: "App",
+  components: {
+    LayoutComponent,
+    TodoComponenet,
+  },
 };
 </script>
 

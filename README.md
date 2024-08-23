@@ -24,3 +24,8 @@
   - tailwind.config.js 파일에 적절한 옵션 넣기
   - post.config.js 파일에 적절한 옵션 넣기
   - main.js 파일에서 tailwind 관련 설정 적용하기
+
+## 세부 구현
+
+- 목록 / 추가 컴포넌트 vue 라우터 이용
+  - 나중에 하기로 ...
