@@ -1,6 +1,6 @@
 <template>
   <section class="flex flex-col items-center gap-3">
-    <h1 class="text-2xl items-start w-full">할 일 추가</h1>
+    <Title titleText="할 일 추가"></Title>
     <input
       type="text"
       class="p-3 border-2 bg-gray-100 rounded-sm w-full"
@@ -23,8 +23,15 @@
 </template>
 
 <script>
+import Title from "../Title.vue";
+
+import { getCurrentTimeStamp } from "@/utils/date";
+
 export default {
   name: "add-todo",
+  components: {
+    Title,
+  },
 
   data() {
     return {
@@ -49,8 +56,15 @@ export default {
       this.title = "";
       this.description = "";
     },
+    // 좋은 구조는 아님. addTodo가 왜 createDodo를 알아야 하는가? index에서 해결해야 함.
     createDodo() {
-      return { title: this.title, description: this.description };
+      return {
+        title: this.title,
+        description: this.description,
+        isDone: false,
+        created_at: getCurrentTimeStamp(),
+        finished_at: null,
+      };
     },
 
     isValid(val) {
