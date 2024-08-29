@@ -5,7 +5,7 @@
       <ListTodo
         v-if="tab === '목록'"
         :listTabIndex="listTabIndex"
-        :todoListInfos="todoListInfos"
+        :todoListInfos="sortedTodoList"
         @update:finishedTodo="handleFinishedTodo"
         @update:clickedListTap="handleClickedListTab"
         @update:sortedOption="handleChangeSortedOption"
@@ -45,13 +45,20 @@ export default {
     this.sortedTodo();
   },
 
+  computed: {
+    sortedTodoList() {
+      console.log("computed 실행");
+      this.sortedTodo();
+      return this.todoListInfos;
+    },
+  },
+
   methods: {
     handleUpdateTab(tab) {
       this.tab = tab;
     },
     handleAddTodo(newTodo) {
       this.todoListInfos.push(newTodo);
-      this.sortedTodo();
     },
     handleFinishedTodo(todoId) {
       const copy = this.todoListInfos.map((todo) => {
@@ -82,6 +89,10 @@ export default {
             (a, b) => a.created_at - b.created_at
           ));
     },
+
+    // sort(todoList, sortType, direction = "asc") {
+    //   return [];
+    // }
   },
 };
 </script>

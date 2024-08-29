@@ -8,11 +8,12 @@ import { timeStampToLocaleString } from "@/utils/date";
 export default {
   name: "date-display",
   props: {
-    dateInfo: String,
+    dateInfo: {
+      type: Number,
+      required: true,
+    },
   },
-  data() {
-    return {};
-  },
+
   methods: {
     getLocaleString(dateInfo) {
       return timeStampToLocaleString(dateInfo);
