@@ -12,7 +12,9 @@ export default {
   components: {
     LayoutComponent,
   },
+
 };
+
 </script>
 
 <style></style>
