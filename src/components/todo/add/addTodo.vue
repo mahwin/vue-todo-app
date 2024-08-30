@@ -48,8 +48,7 @@ export default {
 
       const newTodo = this.createDodo();
 
-      this.$emit("update:todos", newTodo);
-
+      this.$store.dispatch("addTodo", newTodo);
       this.initData();
     },
     initData() {
@@ -62,8 +61,8 @@ export default {
         title: this.title,
         description: this.description,
         isDone: false,
-        created_at: getCurrentTimeStamp(),
-        finished_at: null,
+        createdAt: getCurrentTimeStamp(),
+        finishedAt: null,
       };
     },
 
@@ -75,6 +74,5 @@ export default {
       return val === null || val === undefined;
     },
   },
-  watch: {},
 };
 </script>

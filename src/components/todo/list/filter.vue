@@ -3,7 +3,8 @@
     id="options"
     name="options"
     class="bg-blue-200 rounded-sm"
-    v-model="selectedOption"
+    :value="sortedOption"
+    @change="handleChangeSortedOption"
   >
     <option v-for="optionInfo in options" :key="optionInfo" :value="optionInfo">
       {{ optionInfo }}
@@ -12,17 +13,19 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "filter-component",
   props: { options: Array },
-  data() {
-    return {
-      selectedOption: this.options[0],
-    };
+
+  computed: {
+    ...mapState(["sortedOption"]),
   },
-  watch: {
-    selectedOption(newOption) {
-      this.$emit("update:sortedOption", newOption);
+
+  methods: {
+    handleChangeSortedOption(e) {
+      this.$store.dispatch("changeSortedOption", e.target.value);
     },
   },
 };

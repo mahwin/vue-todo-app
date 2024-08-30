@@ -1,40 +1,40 @@
 <template>
   <div class="flex w-full gap-2">
     <form id="radioForm" class="flex gap-2 justify-center items-center">
-      <label
-        @click="clickRadio(radioInfo.id)"
-        v-for="radioInfo in radioInfos"
-        :key="radioInfo.id"
+      <label v-for="option in options" :key="option"
         ><input
           type="radio"
           name="radioGroup"
-          :value="radioInfo.id"
-          :checked="isChecked(radioInfo.id)"
+          :value="option"
+          v-model="listOption"
+          @change="handleChangedListOption"
         />
-        {{ radioInfo.labelText }}</label
+        {{ option }}</label
       >
     </form>
   </div>
 </template>
 
 <script>
+import { LIST_OPTIONS } from "../constants.js";
+import { mapState } from "vuex";
+
 export default {
   name: "radios-component",
-  props: {
-    radioInfos: Array,
-    listTabIndex: Number,
+
+  computed: {
+    ...mapState(["listOption"]),
   },
+
   data() {
-    return {};
+    return {
+      options: LIST_OPTIONS,
+    };
   },
 
   methods: {
-    isChecked(index) {
-      return this.listTabIndex === index;
-    },
-
-    clickRadio(selectedRadioIndex) {
-      this.$emit("update:clickedListTap-middle", selectedRadioIndex);
+    handleChangedListOption(evt) {
+      this.$store.dispatch("changeListOption", evt.target.value);
     },
   },
 };

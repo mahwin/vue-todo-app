@@ -1,4 +1,4 @@
-import { getCurrentTimeStamp } from "../../utils/date";
+import { getCurrentTimeStamp } from "../utils/date";
 
 const 천 = 1000;
 const 십만 = 천 * 천;

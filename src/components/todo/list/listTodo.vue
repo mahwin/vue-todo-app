@@ -2,15 +2,8 @@
   <section class="flex flex-col items-center gap-3 relative">
     <Title titleText="할 일 목록" />
     <div class="flex w-full px-2">
-      <Radios
-        :radioInfos="radioInfos"
-        :listTabIndex="listTabIndex"
-        @update:clickedListTap-middle="handleClickedListTab"
-      />
-      <FilterComponent
-        :options="sortOptions"
-        @update:sortedOption="handleSortedOption"
-      />
+      <Radios />
+      <FilterComponent :options="sortOptions" />
     </div>
     <ul class="flex p-2 w-full flex-col gap-4">
       <li
@@ -30,7 +23,7 @@
             todoListInfo.description
           }}</span>
           <button
-            @click="emitFinishedTodo(todoListInfo.id)"
+            @click="handleClickfinishedTodo(todoListInfo.id)"
             v-if="!todoListInfo.isDone"
             class="bg-blue-500 border-none text-white"
           >
@@ -38,13 +31,10 @@
           </button>
         </div>
         <div class="flex items-center">
-          <DateDisplay :dateInfo="todoListInfo.created_at" />
-          <div
-            class="flex items-center"
-            v-if="todoListInfo.finished_at != null"
-          >
+          <DateDisplay :dateInfo="todoListInfo.createdAt" />
+          <div class="flex items-center" v-if="todoListInfo.finishedAt != null">
             <span class="text-gray-400">&nbsp;~&nbsp;</span>
-            <DateDisplay :dateInfo="todoListInfo.finished_at" />
+            <DateDisplay :dateInfo="todoListInfo.finishedAt" />
           </div>
         </div>
       </li>
@@ -58,7 +48,7 @@ import Radios from "./radios.vue";
 import DateDisplay from "./displayDate.vue";
 import FilterComponent from "./filter.vue";
 
-import { RADIO_INFOS, SORT_OPTIONS } from "../constants.js";
+import { SORT_OPTIONS } from "../constants.js";
 
 export default {
   name: "list-todo",
@@ -74,14 +64,17 @@ export default {
   },
   data() {
     return {
-      radioInfos: RADIO_INFOS,
       sortOptions: SORT_OPTIONS,
     };
   },
 
   methods: {
-    emitFinishedTodo(todoId) {
-      this.$emit("update:finishedTodo", todoId);
+    handleClickfinishedTodo(todoId) {
+      this.$store.dispatch("finishedTodo", {
+        id: todoId,
+        finishedAt: new Date().getTime(),
+        isDone: true,
+      });
     },
 
     isVisible(todoListInfo) {
@@ -89,12 +82,8 @@ export default {
       if (this.listTabIndex === 1 && todoListInfo.isDone) return true;
     },
 
-    handleClickedListTab(newListTap) {
-      this.$emit("update:clickedListTap", newListTap);
-    },
-
-    handleSortedOption(option) {
-      this.$emit("update:sortedOption", option);
+    handleChangeListOption(newListTap) {
+      this.$store.dispatch("changeListOption", newListTap);
     },
   },
 };
