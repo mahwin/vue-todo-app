@@ -1,13 +1,13 @@
 <template>
   <div class="flex p-1 gap-2">
-    <button
-      v-for="tabName in TABS"
-      :key="tabName"
-      :class="tab === tabName && 'isClicked'"
-      @click="clickTap(tabName)"
-    >
-      {{ tabName }}
-    </button>
+    <ul>
+      <li>
+        <router-link to="/todos">목록</router-link>
+      </li>
+      <li>
+        <router-link to="/add-todo">추가</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -20,31 +20,15 @@ export default {
   props: {
     tab: String,
   },
-  methods: {
-    clickTap(newTab) {
-      if (newTab === this.tab) return;
-
-      this.$emit("update:tab", newTab);
-    },
-  },
-  watch: {},
 };
 </script>
 
-<style>
-button {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  width: 5rem;
-  border: 1px solid #333;
-  border-radius: 0.25rem;
-  background-color: #fff;
-  cursor: pointer;
+<style scoped>
+ul {
+  display: flex;
+  gap: 24px;
 }
-
-.isClicked {
-  background-color: #3182ce;
-  color: #fff;
-  cursor: not-allowed;
+li {
+  padding: 12px;
 }
 </style>

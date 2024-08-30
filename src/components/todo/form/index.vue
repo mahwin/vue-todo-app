@@ -1,28 +1,33 @@
 <template>
-  <section class="flex flex-col items-center gap-3">
-    <Title titleText="할 일 추가"></Title>
-    <input
-      type="text"
-      class="p-3 border-2 bg-gray-100 rounded-sm w-full"
-      placeholder="title"
-      v-model="title"
-    />
-    <textarea
-      class="p-3 bg-gray-100 rounded-sm w-full h-[400px]"
-      placeholder="description"
-      v-model="description"
-    />
+  <div>
+    <Header />
 
-    <button
-      class="flex justify-center items-center border-none text-red-300"
-      @click="addTodoList"
-    >
-      <img src="@/assets/추가.svg" alt="추가하기~!" />
-    </button>
-  </section>
+    <section class="flex flex-col items-center gap-3">
+      <Title titleText="할 일 추가"></Title>
+      <input
+        type="text"
+        class="p-3 border-2 bg-gray-100 rounded-sm w-full"
+        placeholder="title"
+        v-model="title"
+      />
+      <textarea
+        class="p-3 bg-gray-100 rounded-sm w-full h-[400px]"
+        placeholder="description"
+        v-model="description"
+      />
+
+      <button
+        class="flex justify-center items-center border-none text-red-300"
+        @click="addTodoList"
+      >
+        <img src="@/assets/추가.svg" alt="추가하기~!" />
+      </button>
+    </section>
+  </div>
 </template>
 
 <script>
+import Header from "../header.vue";
 import Title from "../Title.vue";
 
 import { getCurrentTimeStamp } from "@/utils/date";
@@ -30,6 +35,7 @@ import { getCurrentTimeStamp } from "@/utils/date";
 export default {
   name: "add-todo",
   components: {
+    Header,
     Title,
   },
 
@@ -47,9 +53,11 @@ export default {
       }
 
       const newTodo = this.createDodo();
-
       this.$store.dispatch("addTodo", newTodo);
+
       this.initData();
+
+      this.$router.push({ path: "/todos" });
     },
     initData() {
       this.title = "";

@@ -6,7 +6,6 @@
 
 <script>
 import LayoutComponent from "./components/layout";
-import { mapState } from "vuex";
 import store from "./store";
 
 export default {
@@ -15,9 +14,7 @@ export default {
   components: {
     LayoutComponent,
   },
-  computed: {
-    ...mapState(["todos"]),
-  },
+
   created() {
     this.$store.dispatch("getTodos");
   },
