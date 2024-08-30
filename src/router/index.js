@@ -3,6 +3,7 @@ import Router from "vue-router";
 
 import TodoList from "../components/todo/list";
 import TodoForm from "../components/todo/form";
+import TodoDetail from "../components/todo/detail";
 
 Vue.use(Router);
 
@@ -14,6 +15,11 @@ export default new Router({
       path: "/todos",
       name: "TodoList",
       component: TodoList,
+    },
+    {
+      path: "/todos/:id",
+      name: "TodoDetail",
+      component: TodoDetail,
     },
     {
       path: "/add-todo",

@@ -14,15 +14,20 @@
 
 <script>
 import { mapState } from "vuex";
+import { SORT_OPTIONS } from "../constants.js";
 
 export default {
   name: "filter-component",
-  props: { options: Array },
 
   computed: {
     ...mapState(["sortedOption"]),
   },
 
+  data() {
+    return {
+      options: SORT_OPTIONS,
+    };
+  },
   methods: {
     handleChangeSortedOption(e) {
       this.$store.dispatch("changeSortedOption", e.target.value);

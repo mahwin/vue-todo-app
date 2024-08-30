@@ -2,14 +2,12 @@
   <div>
     <Header />
     <section class="p-2">
-      <ListTodo :listTabIndex="listTabIndex" :todoListInfos="todos" />
+      <ListTodo />
     </section>
   </div>
 </template>
 
 <script>
-import { TAB } from "../constants.js";
-
 import Header from "../header.vue";
 import ListTodo from "./listTodo.vue";
 
@@ -22,19 +20,7 @@ export default {
     ListTodo,
   },
 
-  data() {
-    return {
-      tab: TAB.목록,
-      todoListInfos: [],
-      listTabIndex: 0,
-    };
-  },
-
   computed: {
-    sortedTodoList() {
-      this.sortedTodo();
-      return this.todoListInfos;
-    },
     ...mapState(["todos"]),
   },
 

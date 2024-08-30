@@ -101,6 +101,23 @@ export default new Vuex.Store({
     changeListOption: ({ commit }, newListOption) => {
       commit("setListOption", newListOption);
     },
+    deleteTodo: ({ dispatch }, deleteTodoId) => {
+      console.log(deleteTodoId, "도착까지 확인");
+      console.log("delete 메소드 관련 api 설계 필요");
+      dispatch;
+      // 통신필요
+      //   authApi
+      //     .delete(joinPath(serviceUrl, userId, deleteTodo.id))
+      //     .then((res) => {
+      //       console.log(res);
+      //       // dispatch("getTodos");
+      //     });
+    },
   },
-  getters: {},
+  getters: {
+    maxId: (state) => {
+      if (state.todos.length === 0) return 0;
+      return Math.max(...state.todos.map((todo) => todo.id));
+    },
+  },
 });
