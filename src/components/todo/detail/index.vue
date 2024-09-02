@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 import Header from "../header.vue";
 
 export default {
@@ -22,14 +22,12 @@ export default {
   },
   computed: {
     ...mapState(["todos"]),
+    ...mapGetters(["getTodoById"]),
     todoId() {
       return this.$route.params.id;
     },
     todo() {
-      const targetIdx = this.todos.findIndex((todo) => {
-        return todo.id == this.todoId;
-      });
-      return this.todos[targetIdx];
+      return this.getTodoById(this.todoId);
     },
   },
 

@@ -119,5 +119,10 @@ export default new Vuex.Store({
       if (state.todos.length === 0) return 0;
       return Math.max(...state.todos.map((todo) => todo.id));
     },
+    getTodoById: (todoId) => {
+      const targetIdx = this.todos.findIndex((todo) => todo.id == todoId);
+      if (targetIdx === -1) return {};
+      return this.todos[targetIdx];
+    },
   },
 });
