@@ -4,7 +4,7 @@ const baseUrl = "http://192.168.143.51";
 const port = "3002";
 
 const baseOption = {
-  baseURL: `${baseUrl}:${port}`,
+  baseURL: process.env.NODE_ENV === "development" ? "/" : `${baseUrl}:${port}`,
   headers: {
     "Content-Type": "application/json",
   },
